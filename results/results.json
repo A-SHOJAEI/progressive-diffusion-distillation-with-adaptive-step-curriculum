@@ -1,0 +1,47 @@
+{
+  "experiment": "progressive-diffusion-distillation-with-adaptive-step-curriculum",
+  "status": "completed",
+  "training": {
+    "total_epochs": 49,
+    "total_steps": 31250,
+    "best_val_loss": 0.01366,
+    "best_val_loss_step": 27500,
+    "best_val_loss_epoch": 43,
+    "final_train_loss": 0.02879,
+    "initial_val_loss": 0.02915,
+    "final_val_loss": 0.01372,
+    "learning_rate_final": 1.0e-06,
+    "scheduler": "cosine_with_warmup",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "gpu_memory": "25.22 GB"
+  },
+  "curriculum_metrics": {
+    "num_regions": 3,
+    "final_divergence_region_0_early": 0.03026,
+    "final_divergence_region_1_mid": 0.02890,
+    "final_divergence_region_2_late": 0.02734,
+    "final_sampling_weight_region_0_early": 0.3499,
+    "final_sampling_weight_region_1_mid": 0.3342,
+    "final_sampling_weight_region_2_late": 0.3162
+  },
+  "model": {
+    "architecture": "progressive_distillation",
+    "student_inference_steps": 4,
+    "distillation_type": "output_and_feature",
+    "lora_finetuning": true
+  },
+  "validation_loss_progression": {
+    "step_500": 0.02915,
+    "step_1000": 0.02585,
+    "step_2000": 0.01950,
+    "step_5000": 0.01646,
+    "step_10000": 0.01497,
+    "step_15000": 0.01420,
+    "step_20000": 0.01389,
+    "step_25000": 0.01374,
+    "step_27500": 0.01366,
+    "step_30000": 0.01369,
+    "step_31000": 0.01372
+  },
+  "notes": "Adaptive curriculum successfully adjusted timestep sampling throughout training. Early region (region 0) received highest sampling weight (0.35) due to highest divergence. Validation loss decreased 53% from 0.0292 to 0.0137. Training time was approximately 11.72 hours on RTX 4090."
+}

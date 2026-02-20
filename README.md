@@ -96,14 +96,25 @@ Training completed successfully in 11.72 hours over 49 epochs (31,250 steps) usi
 
 | Metric | Value |
 |--------|-------|
-| Final Validation Loss | 0.0137 |
+| Best Validation Loss | 0.01366 (step 27,500) |
+| Final Validation Loss | 0.01372 |
+| Final Training Loss | 0.02879 |
+| Initial Validation Loss | 0.02915 |
 | Total Training Steps | 31,250 |
 | Total Epochs | 49 |
 | Training Time | 11.72 hours |
 | Final Learning Rate | 1.00e-06 |
-| Curriculum Regions | 3 (early, mid, late) |
+| GPU | NVIDIA GeForce RTX 4090 |
 
-The model achieved convergence with a best validation loss of 0.0137, demonstrating effective knowledge distillation from the teacher model. The adaptive curriculum mechanism successfully adjusted timestep sampling throughout training, as evidenced by the logged curriculum weight updates. To reproduce these results, run `python scripts/train.py --config configs/default.yaml`.
+### Adaptive Curriculum Statistics
+
+| Region | Final Divergence | Final Sampling Weight |
+|--------|----------------:|---------------------:|
+| Early (region 0) | 0.0303 | 0.3499 |
+| Mid (region 1) | 0.0289 | 0.3342 |
+| Late (region 2) | 0.0273 | 0.3162 |
+
+The adaptive curriculum scheduler successfully identified the early denoising region as most challenging (highest divergence) and allocated more sampling weight to it. Validation loss decreased 53% from 0.0292 to 0.0137 over training. To reproduce these results, run `python scripts/train.py --config configs/default.yaml`.
 
 ## Testing
 
